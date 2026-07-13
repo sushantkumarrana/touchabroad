@@ -1,0 +1,17 @@
+{
+  "name": "touchabroad-website",
+  "version": "1.0.0",
+  "description": "TouchAbroad static marketing website (HTML, CSS, JS)",
+  "private": true,
+  "scripts": {
+    "build": "echo \"Static site — no build step required\"",
+    "start": "npx --yes serve ."
+  },
+  "keywords": [
+    "static",
+    "website",
+    "html",
+    "touchabroad"
+  ],
+  "license": "UNLICENSED"
+}
