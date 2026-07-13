@@ -1,0 +1,829 @@
+<!-- =====================================================================
+     TOUCH ABROAD — SELF-FUNDED PSW  |  Elementor-ready, self-contained
+     • Paste this whole block into ONE Elementor 'HTML' widget.
+     • Recommended: Elementor 'Canvas' page template (no theme header/footer),
+       or place inside a full-width section.
+     • All CSS is scoped under .ta-lp so it will NOT affect the rest of your site.
+     • Illustrations are inlined as SVG — nothing to upload.
+     • Forms: the inline JS does demo validation + redirect. For production,
+       swap each <form> for a Contact Form 7 or Elementor Form (fields already
+       use clean name= attributes: full_name, phone, email, course, contact_method,
+       message, consent). Update internal links (psw.html, contact.html, etc.)
+       to your WordPress permalinks.
+     • Section boundaries are marked with <!-- SECTION --> comments if you
+       prefer to split them across multiple Elementor widgets.
+===================================================================== -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+.ta-lp{font-family:var(--sans);color:var(--gray-800);line-height:1.6;box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+.ta-lp *{box-sizing:border-box;}
+.ta-lp *, .ta-lp *::before, .ta-lp *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  
+  --navy:    #0B1E4A;
+  --navy-mid:#152B6B;
+  --navy-lt: #1E3A8A;
+  --red:     #C1272D;
+  --red-dk:  #9B1E23;
+  --red-lt:  #E8383E;
+  --cream:   #F8F5F0;
+  --ivory:   #FDFAF6;
+  --white:   #FFFFFF;
+  --gray-50: #F4F4F6;
+  --gray-100:#E8E8EC;
+  --gray-300:#C4C4CC;
+  --gray-500:#80808C;
+  --gray-700:#3C3C48;
+  --text:    #0F1523;
+  --green:   #1B8A5A;
+  --green-bg:#E7F4EE;
+
+  
+  --serif:   'Playfair Display', Georgia, serif;
+  --sans:    'Inter', system-ui, sans-serif;
+
+  
+  --radius:  12px;
+  --radius-lg: 20px;
+  --shadow:  0 2px 20px rgba(11,30,74,0.08);
+  --shadow-md: 0 8px 40px rgba(11,30,74,0.12);
+}
+.ta-lp { scroll-behavior: smooth; }
+.ta-lp { font-family: var(--sans); color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+.ta-lp a { color: inherit; }
+.ta-lp img { max-width: 100%; display: block; }
+.ta-lp :focus-visible { outline: 3px solid var(--red); outline-offset: 2px; border-radius: 4px; }
+.ta-lp .skip-link { position: absolute; left: -999px; top: 0; background: var(--navy); color: #fff; padding: 10px 18px; z-index: 2000; border-radius: 0 0 8px 0; }
+.ta-lp .skip-link:focus { left: 0; }
+@media (prefers-reduced-motion: reduce) {
+.ta-lp *, .ta-lp *::before, .ta-lp *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+.ta-lp .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.ta-lp .section { padding: 96px 0; }
+.ta-lp .section-sm { padding: 64px 0; }
+.ta-lp .tag { display: inline-block; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.ta-lp .headline { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--navy); line-height: 1.2; }
+.ta-lp .headline em { font-style: italic; color: var(--red); }
+.ta-lp .subtext { font-family: var(--sans); font-size: 1.0625rem; color: var(--gray-500); line-height: 1.75; margin-top: 16px; }
+.ta-lp .text-center { text-align: center; }
+.ta-lp .divider { width: 56px; height: 3px; background: var(--red); border-radius: 2px; margin: 20px 0; }
+.ta-lp .divider.center { margin-left: auto; margin-right: auto; }
+.ta-lp .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--sans); font-size: 0.9375rem; font-weight: 600; padding: 14px 32px; border-radius: 6px; text-decoration: none; transition: all .22s ease; cursor: pointer; border: none; line-height: 1.2; }
+.ta-lp .btn-primary { background: var(--red); color: var(--white); }
+.ta-lp .btn-primary:hover { background: var(--red-dk); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(193,39,45,.32); }
+.ta-lp .btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+.ta-lp .btn-outline:hover { background: var(--navy); color: var(--white); }
+.ta-lp .btn-white { background: var(--white); color: var(--navy); }
+.ta-lp .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+.ta-lp .btn-ghost-light { background: transparent; color: rgba(255,255,255,.9); border: 1.5px solid rgba(255,255,255,.35); }
+.ta-lp .btn-ghost-light:hover { background: rgba(255,255,255,.12); }
+.ta-lp .btn-block { width: 100%; }
+.ta-lp .btn-lg { padding: 16px 36px; font-size: 1rem; }
+.ta-lp .img-placeholder { background: var(--gray-100); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--gray-500); font-size: 0.875rem; font-weight: 500; text-align: center; position: relative; overflow: hidden; padding: 24px; }
+.ta-lp .img-placeholder::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,.03) 20px, rgba(0,0,0,.03) 21px); }
+.ta-lp .img-placeholder svg { opacity: .35; position: relative; z-index: 1; }
+.ta-lp .img-placeholder span { position: relative; z-index: 1; }
+.ta-lp .ratio-img { width: 100%; height: 100%; object-fit: cover; object-position: center; border-radius: inherit; }
+.ta-lp .hero-illus { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); filter: drop-shadow(0 24px 48px rgba(11,30,74,.30)); }
+.ta-lp .switch-bar { background: var(--cream); border-bottom: 1px solid var(--gray-200); }
+.ta-lp .switch-bar .container { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 14px 20px; font-size: .92rem; color: var(--navy); }
+.ta-lp .switch-bar .sw-label { font-weight: 700; }
+.ta-lp .switch-bar .sw-opt { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; text-decoration: none; font-weight: 600; }
+.ta-lp .switch-bar .sw-opt.active { background: var(--navy); color: #fff; }
+.ta-lp .switch-bar .sw-opt.link { background: #fff; color: var(--navy); border: 1px solid var(--gray-200); transition: all .15s; }
+.ta-lp .switch-bar .sw-opt.link:hover { border-color: var(--red); color: var(--red); }
+.ta-lp .switch-bar .sw-note { color: var(--gray-500); }
+@media (max-width: 768px) {
+.ta-lp .switch-bar .sw-note { display: none; }
+}
+.ta-lp .promo-bar { background: linear-gradient(90deg, var(--red-dk), var(--red)); color: #fff; text-align: center; font-size: .85rem; font-weight: 500; padding: 9px 16px; }
+.ta-lp .promo-bar a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.ta-lp .topbar { background: var(--navy); color: rgba(255,255,255,.7); font-size: .8125rem; padding: 10px 0; }
+.ta-lp .topbar .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.ta-lp .topbar-left { display: flex; gap: 24px; flex-wrap: wrap; }
+.ta-lp .topbar-left a, .ta-lp .topbar-left span { color: rgba(255,255,255,.7); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+.ta-lp .topbar-left a:hover { color: var(--white); }
+.ta-lp .topbar-right { display: flex; gap: 14px; }
+.ta-lp .social-link { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7); text-decoration: none; transition: all .2s; font-size: .75rem; font-weight: 600; }
+.ta-lp .social-link:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+.ta-lp .navbar { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 1px solid var(--gray-100); box-shadow: var(--shadow); }
+.ta-lp .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 74px; gap: 24px; }
+.ta-lp .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+.ta-lp .logo-img { height: 52px; width: auto; }
+.ta-lp .logo-text { display: flex; flex-direction: column; line-height: 1; }
+.ta-lp .logo-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; color: var(--navy); letter-spacing: -.01em; }
+.ta-lp .logo-name span { color: var(--red); }
+.ta-lp .logo-tagline { font-size: .65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-500); margin-top: 2px; }
+.ta-lp .nav-links { display: flex; align-items: center; gap: 4px; }
+.ta-lp .nav-links a { font-size: .9rem; font-weight: 500; color: var(--gray-700); text-decoration: none; padding: 8px 14px; border-radius: 6px; transition: all .2s; white-space: nowrap; }
+.ta-lp .nav-links a:hover { color: var(--navy); background: var(--gray-50); }
+.ta-lp .nav-links a.active { color: var(--red); }
+.ta-lp .nav-item { position: relative; }
+.ta-lp .nav-dropdown { position: absolute; top: calc(100% + 6px); left: 0; background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 8px; min-width: 290px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: all .2s; z-index: 120; }
+.ta-lp .nav-item:hover .nav-dropdown, .ta-lp .nav-item:focus-within .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.ta-lp .nav-dropdown a { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 8px; }
+.ta-lp .nav-dropdown a strong { font-size: .9rem; color: var(--navy); font-weight: 600; }
+.ta-lp .nav-dropdown a small { font-size: .78rem; color: var(--gray-500); }
+.ta-lp .nav-dropdown a:hover { background: var(--gray-50); }
+.ta-lp .nav-cta { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+.ta-lp .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+.ta-lp .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all .3s; }
+.ta-lp .mobile-menu { display: none; background: var(--white); border-top: 1px solid var(--gray-100); padding: 16px 24px 24px; }
+.ta-lp .mobile-menu.open { display: block; }
+.ta-lp .mobile-menu a { display: block; font-size: .9375rem; font-weight: 500; color: var(--gray-700); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--gray-50); }
+.ta-lp .mobile-menu .sub a { padding-left: 16px; font-size: .9rem; color: var(--gray-500); }
+.ta-lp .hero { background: var(--navy); position: relative; overflow: hidden; min-height: 92vh; display: flex; align-items: center; }
+.ta-lp .hero-bg { position: absolute; inset: 0; }
+.ta-lp .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: .18; }
+.ta-lp .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(11,30,74,.97) 45%, rgba(11,30,74,.65) 100%); }
+.ta-lp .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 80% 50%, rgba(193,39,45,.12) 0%, transparent 55%); }
+.ta-lp .hero .container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-top: 56px; padding-bottom: 56px; }
+.ta-lp .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(193,39,45,.15); border: 1px solid rgba(193,39,45,.3); color: #f08080; font-size: .8125rem; font-weight: 600; letter-spacing: 1px; padding: 7px 16px; border-radius: 100px; margin-bottom: 24px; text-transform: uppercase; }
+.ta-lp .hero-badge span.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red-lt); display: inline-block; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+.ta-lp .hero-title { font-family: var(--serif); font-size: clamp(2.25rem, 4.6vw, 3.5rem); font-weight: 800; color: var(--white); line-height: 1.12; margin-bottom: 20px; }
+.ta-lp .hero-title em { font-style: italic; color: #f08080; }
+.ta-lp .hero-desc { font-size: 1.0625rem; color: rgba(255,255,255,.72); line-height: 1.7; margin-bottom: 26px; max-width: 520px; }
+.ta-lp .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+.ta-lp .hero-usps { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; max-width: 520px; }
+.ta-lp .hero-usp { display: flex; align-items: center; gap: 9px; font-size: .9rem; color: rgba(255,255,255,.85); }
+.ta-lp .hero-usp svg { flex-shrink: 0; color: #6fd49a; }
+.ta-lp .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; padding-top: 28px; margin-top: 28px; border-top: 1px solid rgba(255,255,255,.1); }
+.ta-lp .hero-stat-num { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--white); }
+.ta-lp .hero-stat-num span { color: var(--red-lt); }
+.ta-lp .hero-stat-label { font-size: .78rem; color: rgba(255,255,255,.55); margin-top: 2px; letter-spacing: .3px; }
+.ta-lp .page-hero { background: var(--navy); position: relative; overflow: hidden; }
+.ta-lp .page-hero .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(11,30,74,.97) 40%, rgba(11,30,74,.6) 100%); }
+.ta-lp .page-hero .container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-top: 56px; padding-bottom: 56px; }
+@media (max-width: 880px) {
+.ta-lp .page-hero .container, .ta-lp .hero .container { grid-template-columns: 1fr; }
+}
+.ta-lp .lead-card { background: var(--white); border-radius: var(--radius-lg); box-shadow: 0 20px 60px rgba(0,0,0,.28); overflow: hidden; }
+.ta-lp .lead-card-head { background: linear-gradient(135deg, var(--red-dk), var(--red)); padding: 22px 28px; color: #fff; }
+.ta-lp .lead-card-head h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; }
+.ta-lp .lead-card-head p { font-size: .85rem; opacity: .9; margin-top: 4px; }
+.ta-lp .lead-card-body { padding: 24px 28px 28px; }
+.ta-lp .lead-foot { font-size: .78rem; color: var(--gray-500); text-align: center; margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.ta-lp .form-shell { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; }
+.ta-lp .form-shell .lead-card-head { background: var(--navy); }
+.ta-lp .field { margin-bottom: 14px; }
+.ta-lp .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ta-lp .field label { display: block; font-size: .8rem; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
+.ta-lp .field label .req { color: var(--red); }
+.ta-lp .field input, .ta-lp .field select, .ta-lp .field textarea {
+  width: 100%; font-family: var(--sans); font-size: .95rem; color: var(--text);
+  padding: 12px 14px; border: 1.5px solid var(--gray-100); border-radius: 8px;
+  background: var(--gray-50); transition: border-color .18s, background .18s, box-shadow .18s;
+}
+.ta-lp .field input:focus, .ta-lp .field select:focus, .ta-lp .field textarea:focus { border-color: var(--navy-lt); background: #fff; box-shadow: 0 0 0 3px rgba(30,58,138,.1); outline: none; }
+.ta-lp .field textarea { resize: vertical; min-height: 92px; }
+.ta-lp .field.has-error input, .ta-lp .field.has-error select, .ta-lp .field.has-error textarea { border-color: var(--red); background: #fff5f5; }
+.ta-lp .field-error { display: none; color: var(--red); font-size: .76rem; margin-top: 5px; font-weight: 500; }
+.ta-lp .field.has-error .field-error { display: block; }
+.ta-lp .consent { display: flex; align-items: flex-start; gap: 10px; margin: 6px 0 16px; }
+.ta-lp .consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--red); }
+.ta-lp .consent label { font-size: .78rem; color: var(--gray-500); line-height: 1.5; font-weight: 400; }
+.ta-lp .consent a { color: var(--navy); text-decoration: underline; }
+.ta-lp .hp-field { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+.ta-lp .form-alert { padding: 12px 16px; border-radius: 8px; font-size: .88rem; font-weight: 500; margin-bottom: 14px; display: none; }
+.ta-lp .form-alert.success { display: block; background: var(--green-bg); color: var(--green); border: 1px solid #b6e3cd; }
+.ta-lp .form-alert.error { display: block; background: #fdecec; color: var(--red-dk); border: 1px solid #f5c2c4; }
+.ta-lp .btn-submit .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; display: none; }
+.ta-lp .btn-submit.loading .spinner { display: inline-block; }
+.ta-lp .btn-submit.loading .btn-label { opacity: .8; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.ta-lp .trust-bar { background: var(--red); padding: 28px 0; }
+.ta-lp .trust-bar .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.ta-lp .trust-item { display: flex; align-items: center; gap: 14px; }
+.ta-lp .trust-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ta-lp .trust-label { font-size: .8rem; color: rgba(255,255,255,.75); font-weight: 500; }
+.ta-lp .trust-value { font-family: var(--serif); font-size: 1.2rem; color: var(--white); font-weight: 700; }
+.ta-lp .trust-sep { width: 1px; height: 40px; background: rgba(255,255,255,.2); }
+.ta-lp .about { background: var(--ivory); }
+.ta-lp .about .container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.ta-lp .about-img-wrap { position: relative; }
+.ta-lp .about-img { height: 500px; border-radius: var(--radius-lg); overflow: hidden; }
+.ta-lp .about-badge { position: absolute; bottom: -20px; right: -20px; background: var(--navy); border-radius: var(--radius); padding: 24px 28px; color: var(--white); text-align: center; box-shadow: var(--shadow-md); }
+.ta-lp .about-badge-num { font-family: var(--serif); font-size: 2.5rem; font-weight: 800; color: var(--white); line-height: 1; }
+.ta-lp .about-badge-num span { color: var(--red-lt); }
+.ta-lp .about-badge-label { font-size: .8rem; color: rgba(255,255,255,.6); margin-top: 4px; }
+.ta-lp .about-checkpoints { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+.ta-lp .about-check { display: flex; align-items: flex-start; gap: 14px; }
+.ta-lp .check-icon { width: 24px; height: 24px; border-radius: 50%; background: rgba(193,39,45,.1); color: var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.ta-lp .about-check p { font-size: .9375rem; color: var(--gray-700); line-height: 1.5; }
+.ta-lp .about-check strong { color: var(--navy); font-weight: 600; }
+.ta-lp .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.ta-lp .audience-card { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 32px 26px; transition: all .25s; }
+.ta-lp .audience-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: transparent; }
+.ta-lp .audience-emoji { width: 56px; height: 56px; border-radius: 14px; background: rgba(11,30,74,.06); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 18px; }
+.ta-lp .audience-card h3 { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); font-weight: 700; margin-bottom: 10px; }
+.ta-lp .audience-card p { font-size: .9rem; color: var(--gray-500); line-height: 1.6; }
+.ta-lp .services { background: var(--white); }
+.ta-lp .services-header { text-align: center; max-width: 660px; margin: 0 auto 56px; }
+.ta-lp .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.ta-lp .service-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); overflow: hidden; transition: all .28s ease; padding: 30px 26px; }
+.ta-lp .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.ta-lp .service-icon-wrap { width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: rgba(11,30,74,.06); }
+.ta-lp .service-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+.ta-lp .service-desc { font-size: .9rem; color: var(--gray-500); line-height: 1.65; }
+.ta-lp .programs { background: var(--cream); }
+.ta-lp .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 12px; }
+.ta-lp .program-card { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all .28s; }
+.ta-lp .program-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.ta-lp .program-card.featured { border-top: 3px solid var(--red); }
+.ta-lp .program-top { padding: 28px 26px 20px; }
+.ta-lp .program-emoji { width: 56px; height: 56px; border-radius: 14px; background: rgba(193,39,45,.08); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; margin-bottom: 16px; }
+.ta-lp .program-pill { display: inline-block; background: rgba(193,39,45,.08); color: var(--red); font-size: .7rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+.ta-lp .program-card h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--navy); font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
+.ta-lp .program-tagline { font-size: .82rem; color: var(--red); font-weight: 600; margin-bottom: 12px; }
+.ta-lp .program-card > .program-top > p { font-size: .9rem; color: var(--gray-500); line-height: 1.6; }
+.ta-lp .program-points { list-style: none; padding: 0 26px; margin: 0 0 4px; display: flex; flex-direction: column; gap: 8px; }
+.ta-lp .program-points li { font-size: .85rem; color: var(--gray-700); display: flex; align-items: flex-start; gap: 8px; }
+.ta-lp .program-points li::before { content: '✓'; color: var(--red); font-weight: 800; }
+.ta-lp .program-outcome { margin: 18px 26px 0; padding: 14px 16px; background: var(--gray-50); border-radius: 10px; }
+.ta-lp .program-outcome-label { font-size: .72rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--navy); margin-bottom: 4px; }
+.ta-lp .program-outcome-roles { font-size: .82rem; color: var(--gray-500); line-height: 1.5; }
+.ta-lp .program-foot { margin-top: auto; padding: 20px 26px 26px; }
+.ta-lp .why { background: var(--navy); overflow: hidden; }
+.ta-lp .why .container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.ta-lp .why-content .tag { color: rgba(240,128,128,.9); }
+.ta-lp .why-content .headline { color: var(--white); }
+.ta-lp .why-content .headline em { color: #f08080; }
+.ta-lp .why-content .subtext { color: rgba(255,255,255,.6); }
+.ta-lp .why-features { margin-top: 36px; display: flex; flex-direction: column; gap: 20px; }
+.ta-lp .why-feat { display: flex; align-items: flex-start; gap: 18px; padding: 22px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); transition: background .25s; }
+.ta-lp .why-feat:hover { background: rgba(255,255,255,.08); }
+.ta-lp .why-feat-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(193,39,45,.2); border: 1px solid rgba(193,39,45,.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.4rem; }
+.ta-lp .why-feat-title { font-family: var(--serif); font-size: 1.0625rem; color: var(--white); font-weight: 600; margin-bottom: 6px; }
+.ta-lp .why-feat-desc { font-size: .875rem; color: rgba(255,255,255,.55); line-height: 1.65; }
+.ta-lp .why-visual { position: relative; }
+.ta-lp .why-img-main { height: 480px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); color: rgba(255,255,255,.25); }
+.ta-lp .why-img-over { position: absolute; bottom: 32px; left: -32px; background: var(--white); border-radius: var(--radius); padding: 20px 24px; box-shadow: var(--shadow-md); max-width: 240px; }
+.ta-lp .why-img-over-title { font-family: var(--serif); font-size: 1rem; color: var(--navy); font-weight: 700; margin-bottom: 4px; }
+.ta-lp .why-img-over-sub { font-size: .8rem; color: var(--gray-500); line-height: 1.5; }
+.ta-lp .why-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 36px; }
+.ta-lp .why-stat { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px 20px; }
+.ta-lp .why-stat-num { font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: #fff; }
+.ta-lp .why-stat-num span { color: var(--red-lt); }
+.ta-lp .why-stat-label { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: 2px; }
+.ta-lp .process { background: var(--cream); }
+.ta-lp .process-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+.ta-lp .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+.ta-lp .process-steps::before { content: ''; position: absolute; top: 32px; left: calc(12.5% + 16px); right: calc(12.5% + 16px); height: 1px; background: var(--gray-100); z-index: 0; }
+.ta-lp .process-step { text-align: center; position: relative; z-index: 1; }
+.ta-lp .step-num { width: 64px; height: 64px; border-radius: 50%; background: var(--white); border: 2px solid var(--gray-100); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: var(--serif); font-size: 1.375rem; font-weight: 800; color: var(--gray-300); transition: all .3s; }
+.ta-lp .process-step:hover .step-num { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.ta-lp .process-step.active .step-num { background: var(--red); border-color: var(--red); color: var(--white); }
+.ta-lp .step-title { font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.ta-lp .step-desc { font-size: .875rem; color: var(--gray-500); line-height: 1.6; }
+.ta-lp .testimonials { background: var(--white); }
+.ta-lp .testimonials-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+.ta-lp .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.ta-lp .testi-card { background: var(--ivory); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 32px; transition: all .25s; }
+.ta-lp .testi-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+.ta-lp .testi-card.featured { background: var(--navy); border-color: var(--navy); }
+.ta-lp .testi-stars { display: flex; gap: 3px; margin-bottom: 16px; color: #F59E0B; font-size: 1rem; letter-spacing: 1px; }
+.ta-lp .testi-text { font-family: var(--serif); font-size: 1rem; color: var(--gray-700); line-height: 1.7; margin-bottom: 22px; font-style: italic; }
+.ta-lp .testi-card.featured .testi-text { color: rgba(255,255,255,.88); }
+.ta-lp .testi-author { display: flex; align-items: center; gap: 12px; }
+.ta-lp .testi-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: .875rem; font-weight: 700; color: var(--navy); flex-shrink: 0; }
+.ta-lp .testi-card.featured .testi-avatar { background: rgba(255,255,255,.15); color: var(--white); }
+.ta-lp .testi-name { font-size: .9rem; font-weight: 600; color: var(--navy); }
+.ta-lp .testi-card.featured .testi-name { color: var(--white); }
+.ta-lp .testi-role { font-size: .8rem; color: var(--gray-500); }
+.ta-lp .testi-card.featured .testi-role { color: rgba(255,255,255,.55); }
+.ta-lp .elig { background: var(--ivory); }
+.ta-lp .elig-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 940px; margin: 0 auto; }
+.ta-lp .elig-item { display: flex; align-items: flex-start; gap: 14px; background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 20px 22px; }
+.ta-lp .elig-check { width: 28px; height: 28px; border-radius: 50%; background: var(--green-bg); color: var(--green); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 800; }
+.ta-lp .elig-item h4 { font-size: .95rem; color: var(--navy); font-weight: 600; margin-bottom: 3px; }
+.ta-lp .elig-item p { font-size: .85rem; color: var(--gray-500); line-height: 1.55; }
+.ta-lp .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.ta-lp .feature-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.ta-lp .feature-card { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 28px 26px; transition: all .25s; }
+.ta-lp .feature-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+.ta-lp .feature-emoji { width: 52px; height: 52px; border-radius: 13px; background: rgba(11,30,74,.06); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px; }
+.ta-lp .feature-card h3 { font-family: var(--serif); font-size: 1.08rem; color: var(--navy); font-weight: 700; margin-bottom: 8px; }
+.ta-lp .feature-card p { font-size: .88rem; color: var(--gray-500); line-height: 1.6; }
+.ta-lp .curr-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.ta-lp .curr-panel { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 32px; }
+.ta-lp .curr-panel h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--navy); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+.ta-lp .curr-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ta-lp .curr-list li { display: flex; align-items: flex-start; gap: 12px; font-size: .92rem; color: var(--gray-700); }
+.ta-lp .curr-list li::before { content: ''; width: 20px; height: 20px; border-radius: 50%; background: rgba(193,39,45,.1); flex-shrink: 0; margin-top: 1px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C1272D' stroke-width='3'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+.ta-lp .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.ta-lp .split.reverse .split-media { order: 2; }
+.ta-lp .split-media { border-radius: var(--radius-lg); overflow: hidden; min-height: 360px; }
+.ta-lp .split-content .tag { margin-bottom: 12px; }
+.ta-lp .role-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.ta-lp .role-chip { background: #fff; border: 1px solid var(--gray-100); border-radius: 100px; padding: 9px 18px; font-size: .85rem; font-weight: 500; color: var(--navy); }
+.ta-lp .role-chip.navy { background: var(--navy); color: #fff; border-color: var(--navy); }
+.ta-lp .cta-banner { background: var(--red); position: relative; overflow: hidden; }
+.ta-lp .cta-banner::before { content: ''; position: absolute; top: -60px; right: -60px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,.06); }
+.ta-lp .cta-banner::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(0,0,0,.06); }
+.ta-lp .cta-banner .container { position: relative; z-index: 2; text-align: center; padding: 80px 24px; }
+.ta-lp .cta-banner h2 { font-family: var(--serif); font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 800; color: var(--white); margin-bottom: 16px; }
+.ta-lp .cta-banner p { font-size: 1.0625rem; color: rgba(255,255,255,.85); max-width: 560px; margin: 0 auto 32px; line-height: 1.7; }
+.ta-lp .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.ta-lp .faq { background: var(--ivory); }
+.ta-lp .faq-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.ta-lp .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.ta-lp .faq-item { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); overflow: hidden; transition: box-shadow .2s; }
+.ta-lp .faq-item.open { box-shadow: var(--shadow); }
+.ta-lp .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; background: none; border: none; cursor: pointer; text-align: left; gap: 16px; }
+.ta-lp .faq-q-text { font-family: var(--sans); font-size: .9375rem; font-weight: 600; color: var(--navy); line-height: 1.4; }
+.ta-lp .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--gray-50); border: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .25s; color: var(--gray-500); }
+.ta-lp .faq-item.open .faq-icon { background: var(--red); border-color: var(--red); color: var(--white); transform: rotate(45deg); }
+.ta-lp .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.ta-lp .faq-item.open .faq-a { max-height: 400px; }
+.ta-lp .faq-a-inner { padding: 0 28px 22px; font-size: .9375rem; color: var(--gray-500); line-height: 1.75; border-top: 1px solid var(--gray-50); padding-top: 16px; }
+.ta-lp .breadcrumbs { background: var(--gray-50); border-bottom: 1px solid var(--gray-100); }
+.ta-lp .breadcrumbs .container { display: flex; align-items: center; gap: 8px; padding-top: 14px; padding-bottom: 14px; font-size: .82rem; color: var(--gray-500); }
+.ta-lp .breadcrumbs a { color: var(--navy); text-decoration: none; }
+.ta-lp .breadcrumbs a:hover { color: var(--red); }
+.ta-lp .breadcrumbs span.sep { color: var(--gray-300); }
+.ta-lp .footer { background: var(--navy); color: rgba(255,255,255,.7); }
+.ta-lp .footer-top { padding: 72px 0 48px; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; }
+.ta-lp .footer-brand .logo-img { height: 48px; filter: brightness(0) invert(1); opacity: .92; }
+.ta-lp .footer-brand p { font-size: .9rem; color: rgba(255,255,255,.55); line-height: 1.75; margin-top: 16px; max-width: 300px; }
+.ta-lp .footer-socials { display: flex; gap: 10px; margin-top: 24px; }
+.ta-lp .footer-col h4 { font-family: var(--serif); font-size: 1.0625rem; color: var(--white); font-weight: 700; margin-bottom: 20px; }
+.ta-lp .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.ta-lp .footer-col ul li a { font-size: .9rem; color: rgba(255,255,255,.55); text-decoration: none; transition: color .2s; display: flex; align-items: center; gap: 8px; }
+.ta-lp .footer-col ul li a:hover { color: var(--white); }
+.ta-lp .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.ta-lp .footer-contact-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.ta-lp .footer-contact-text { font-size: .875rem; color: rgba(255,255,255,.55); line-height: 1.5; }
+.ta-lp .footer-contact-text a { color: rgba(255,255,255,.55); text-decoration: none; transition: color .2s; }
+.ta-lp .footer-contact-text a:hover { color: var(--white); }
+.ta-lp .footer-bottom { padding: 20px 0; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.ta-lp .footer-bottom p { font-size: .8375rem; color: rgba(255,255,255,.4); }
+.ta-lp .footer-bottom-links { display: flex; gap: 20px; }
+.ta-lp .footer-bottom-links a { font-size: .8375rem; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+.ta-lp .footer-bottom-links a:hover { color: rgba(255,255,255,.7); }
+.ta-lp .whatsapp-float { position: fixed; bottom: 28px; right: 28px; width: 54px; height: 54px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,.4); text-decoration: none; z-index: 999; transition: transform .2s; }
+.ta-lp .whatsapp-float:hover { transform: scale(1.1); }
+.ta-lp .ty-wrap { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 24px; }
+.ta-lp .ty-inner { max-width: 600px; }
+.ta-lp .ty-check { width: 92px; height: 92px; border-radius: 50%; background: var(--green-bg); color: var(--green); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; }
+.ta-lp .ty-inner h1 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.75rem); color: var(--navy); margin-bottom: 16px; }
+.ta-lp .ty-inner p { font-size: 1.05rem; color: var(--gray-500); line-height: 1.7; margin-bottom: 14px; }
+.ta-lp .ty-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+.ta-lp .ty-next { background: var(--ivory); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 22px 26px; margin-top: 36px; text-align: left; }
+.ta-lp .ty-next h3 { font-family: var(--serif); color: var(--navy); font-size: 1.05rem; margin-bottom: 8px; }
+.ta-lp .ty-next p { font-size: .9rem; margin-bottom: 0; }
+.ta-lp .prose { max-width: 820px; margin: 0 auto; }
+.ta-lp .prose h2 { font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin: 36px 0 14px; }
+.ta-lp .prose h3 { font-family: var(--serif); font-size: 1.15rem; color: var(--navy); margin: 24px 0 10px; }
+.ta-lp .prose p, .ta-lp .prose li { font-size: .98rem; color: var(--gray-700); line-height: 1.8; margin-bottom: 12px; }
+.ta-lp .prose ul { padding-left: 22px; margin-bottom: 16px; }
+.ta-lp .prose a { color: var(--red); text-decoration: underline; }
+.ta-lp .prose .meta { font-size: .85rem; color: var(--gray-500); }
+.ta-lp .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+.ta-lp .contact-info-list { display: flex; flex-direction: column; gap: 22px; margin: 28px 0; }
+.ta-lp .contact-info-item { display: flex; gap: 16px; align-items: flex-start; }
+.ta-lp .contact-info-icon { width: 46px; height: 46px; border-radius: 12px; background: rgba(193,39,45,.08); color: var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ta-lp .contact-info-item h4 { font-size: .95rem; color: var(--navy); margin-bottom: 3px; }
+.ta-lp .contact-info-item p, .ta-lp .contact-info-item a { font-size: .92rem; color: var(--gray-500); text-decoration: none; }
+.ta-lp .contact-info-item a:hover { color: var(--red); }
+.ta-lp .map-embed { margin-top: 28px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--gray-100); height: 280px; }
+.ta-lp .map-embed iframe { width: 100%; height: 100%; border: 0; }
+.ta-lp .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.ta-lp .fade-up.visible { opacity: 1; transform: translateY(0); }
+.ta-lp .fade-up.d1 { transition-delay: .08s; }
+.ta-lp .fade-up.d2 { transition-delay: .16s; }
+.ta-lp .fade-up.d3 { transition-delay: .24s; }
+@media (max-width: 1024px) {
+.ta-lp .services-grid, .ta-lp .audience-grid { grid-template-columns: repeat(2, 1fr); }
+.ta-lp .programs-grid { grid-template-columns: repeat(2, 1fr); }
+.ta-lp .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 880px) {
+.ta-lp .hero .container, .ta-lp .page-hero .container { grid-template-columns: 1fr; gap: 36px; padding-top: 40px; }
+.ta-lp .about .container, .ta-lp .why .container, .ta-lp .split, .ta-lp .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+.ta-lp .split.reverse .split-media { order: 0; }
+.ta-lp .why-visual { display: none; }
+.ta-lp .curr-panels { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+.ta-lp .topbar { display: none; }
+.ta-lp .nav-links, .ta-lp .nav-cta { display: none; }
+.ta-lp .hamburger { display: flex; }
+.ta-lp .section { padding: 64px 0; }
+.ta-lp .hero { min-height: auto; }
+.ta-lp .about-img-wrap { order: -1; }
+.ta-lp .about-badge { right: 8px; bottom: -12px; }
+.ta-lp .process-steps { grid-template-columns: repeat(2, 1fr); }
+.ta-lp .process-steps::before { display: none; }
+.ta-lp .testimonials-grid, .ta-lp .feature-grid, .ta-lp .feature-grid.cols-2 { grid-template-columns: 1fr; }
+.ta-lp .programs-grid, .ta-lp .audience-grid, .ta-lp .services-grid { grid-template-columns: 1fr; }
+.ta-lp .elig-grid { grid-template-columns: 1fr; }
+.ta-lp .trust-bar .container { flex-direction: column; gap: 16px; }
+.ta-lp .trust-sep { display: none; }
+.ta-lp .footer-top { grid-template-columns: 1fr; gap: 32px; }
+.ta-lp .footer-bottom { flex-direction: column; text-align: center; }
+.ta-lp .field-row { grid-template-columns: 1fr; }
+.ta-lp .hero-usps { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+.ta-lp .container { padding: 0 16px; }
+.ta-lp .hero-title { font-size: 2rem; }
+.ta-lp .headline { font-size: 1.75rem; }
+.ta-lp .hero-stats { gap: 20px; }
+.ta-lp .process-steps { grid-template-columns: 1fr; }
+.ta-lp .hero-actions { flex-direction: column; align-items: stretch; }
+.ta-lp .hero-actions .btn { width: 100%; }
+}
+@media (min-width: 1400px) {
+.ta-lp .container { max-width: 1320px; }
+}
+.ta-lp body[data-page="home"]   .nav-home, .ta-lp body[data-page="psw"]    .nav-psw, .ta-lp body[data-page="office"] .nav-office, .ta-lp body[data-page="eca"]    .nav-eca, .ta-lp body[data-page="contact"].nav-contact { color: var(--red); }
+.ta-lp body[data-page="psw"]    .nav-programs, .ta-lp body[data-page="office"] .nav-programs, .ta-lp body[data-page="eca"]    .nav-programs { color: var(--red); }
+</style>
+
+<div class="ta-lp">
+
+<!-- SECTION: hero -->
+<section class="page-hero" data-section="hero">
+  <div class="hero-bg"><div class="hero-overlay"></div><div class="hero-pattern"></div></div>
+  <div class="container">
+    <div class="hero-content fade-up">
+      <div class="hero-badge"><span class="dot"></span>🇨🇦 International Students & Work Permit Holders</div>
+      <h1 class="hero-title">Personal Support Worker <em>— Self-Funded</em></h1>
+      <p class="hero-desc">Start your healthcare career in Canada through a government-recognised Ontario college. Open to international students and work permit holders, with interest-free payment plans, flexible schedules and a pathway to Permanent Residency. Job-ready in under a year.</p>
+      <div class="hero-actions">
+        <a href="tel:+12899697018" class="btn btn-primary btn-lg" data-event="phone_click" data-section="hero">📞 Call: +1 (289) 969-7018</a>
+        <a href="#enquire" class="btn btn-ghost-light btn-lg" data-event="cta_click" data-button="hero-free-enquiry">Free Enquiry</a>
+      </div>
+      <div class="hero-usps"><div class="hero-usp"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Interest-free payment plans</div><div class="hero-usp"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Open to work permit holders</div><div class="hero-usp"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Flexible evening & weekend classes</div><div class="hero-usp"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Pathway to PR</div></div>
+    </div>
+    <div class="hero-visual fade-up d1"><div class="lead-card" data-section="hero">
+  <div class="lead-card-head">
+    <h3>📋 Get Free Admission Info</h3>
+    <p>Speak to an admissions advisor — no obligation, takes 1 minute.</p>
+  </div>
+  <div class="lead-card-body">
+    <form data-lead-form data-form-name="psw_self_hero" novalidate>
+      <div class="form-alert" role="status" aria-live="polite"></div>
+      <div class="field">
+        <label for="psw_self_hero-name">Full Name <span class="req">*</span></label>
+        <input type="text" id="psw_self_hero-name" name="full_name" required autocomplete="name" placeholder="Your full name">
+        <div class="field-error" role="alert"></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="psw_self_hero-phone">Phone Number <span class="req">*</span></label>
+          <input type="tel" id="psw_self_hero-phone" name="phone" required data-validate="phone" autocomplete="tel" placeholder="(289) 000-0000">
+          <div class="field-error" role="alert"></div>
+        </div>
+        <div class="field">
+          <label for="psw_self_hero-email">Email <span class="req">*</span></label>
+          <input type="email" id="psw_self_hero-email" name="email" required data-validate="email" autocomplete="email" placeholder="you@email.com">
+          <div class="field-error" role="alert"></div>
+        </div>
+      </div>
+      <input type="hidden" name="course" value="Personal Support Worker — Self-Funded">
+      <div class="field">
+        <label for="psw_self_hero-contact">Preferred Contact Method</label>
+        <select id="psw_self_hero-contact" name="contact_method">
+          <option value="Phone Call">Phone Call</option>
+          <option value="WhatsApp">WhatsApp</option>
+          <option value="Email">Email</option>
+          <option value="Text Message">Text Message</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="psw_self_hero-message">Message (optional)</label>
+        <textarea id="psw_self_hero-message" name="message" rows="3" placeholder="Tell us a little about your goals…"></textarea>
+      </div>
+      <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="_hp" tabindex="-1" autocomplete="off"></label></div>
+      <div class="consent">
+        <input type="checkbox" id="psw_self_hero-consent" name="consent" data-consent>
+        <label for="psw_self_hero-consent">I agree to be contacted by Touch Abroad about programs and funding, and accept the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>. <span class="req">*</span>
+          <div class="field-error" role="alert"></div>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-submit" data-event="cta_click" data-button="psw_self_hero-submit">
+        <span class="btn-label">Request Free Info</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+      <div class="lead-foot">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        100% private — we never share your details.
+      </div>
+    </form>
+  </div>
+</div></div>
+  </div>
+</section><nav class="breadcrumbs" aria-label="Breadcrumb"><div class="container"><a href="index.html">Home</a><span class="sep">›</span><a href="index.html#programs">Programs</a><span class="sep">›</span><span aria-current="page">PSW — Self-Funded</span></div></nav><div class="switch-bar" data-section="psw-switch"><div class="container"><span class="sw-label">Two ways to train as a PSW:</span><a href="psw.html" class="sw-opt link" data-event="cta_click" data-button="switch-to-gov-psw">Government-Funded →</a><span class="sw-note">for eligible Ontario PR &amp; citizens</span><a class="sw-opt active">Self-Funded</a><span class="sw-note">for international students &amp; work permit holders</span></div></div><!-- SECTION: about -->
+<section class="about section" data-section="about">
+  <div class="container">
+    <div class="about-img-wrap fade-up">
+      <div class="about-img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 520" class="ta-illus" role="img" aria-label="healthcare illustration"><defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#EEF2FB"/><stop offset="1" stop-color="#FDFAF6"/></linearGradient>
+      <linearGradient id="navyg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#152B6B"/><stop offset="1" stop-color="#0B1E4A"/></linearGradient>
+      <linearGradient id="redg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#E8383E"/><stop offset="1" stop-color="#C1272D"/></linearGradient>
+      <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#0B1E4A" flood-opacity="0.16"/></filter>
+    </defs><rect width="680" height="520" rx="22" fill="url(#bg)"/><circle cx="626" cy="447" r="136" fill="#C1272D" opacity="0.07"/><circle cx="82" cy="83" r="109" fill="#0B1E4A" opacity="0.06"/><g fill="#0B1E4A" opacity="0.18"><circle cx="503.2" cy="62.4" r="2.4"/><circle cx="503.2" cy="75.4" r="2.4"/><circle cx="503.2" cy="88.4" r="2.4"/><circle cx="503.2" cy="101.4" r="2.4"/><circle cx="516.2" cy="62.4" r="2.4"/><circle cx="516.2" cy="75.4" r="2.4"/><circle cx="516.2" cy="88.4" r="2.4"/><circle cx="516.2" cy="101.4" r="2.4"/><circle cx="529.2" cy="62.4" r="2.4"/><circle cx="529.2" cy="75.4" r="2.4"/><circle cx="529.2" cy="88.4" r="2.4"/><circle cx="529.2" cy="101.4" r="2.4"/><circle cx="542.2" cy="62.4" r="2.4"/><circle cx="542.2" cy="75.4" r="2.4"/><circle cx="542.2" cy="88.4" r="2.4"/><circle cx="542.2" cy="101.4" r="2.4"/><circle cx="555.2" cy="62.4" r="2.4"/><circle cx="555.2" cy="75.4" r="2.4"/><circle cx="555.2" cy="88.4" r="2.4"/><circle cx="555.2" cy="101.4" r="2.4"/></g><g filter="url(#sh)"><rect x="136" y="120" width="354" height="239" rx="18" fill="#fff"/></g><circle cx="242" cy="191" r="48" fill="url(#navyg)"/><g transform="translate(214.6,163.9) scale(2.2923)" fill="none" stroke="#fff" stroke-width="0.92" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 10-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></g><rect x="193" y="268" width="219" height="9" rx="4.5" fill="#0B1E4A" opacity="0.85"/><rect x="193" y="288" width="149" height="9" rx="4.5" fill="#0B1E4A" opacity="0.20"/><rect x="193" y="308" width="106" height="9" rx="4.5" fill="#C1272D" opacity="0.85"/><g filter="url(#sh)"><rect x="408" y="52" width="118" height="46" rx="23" fill="#fff"/></g><circle cx="434" cy="75" r="13" fill="#1B8A5A"/><g transform="translate(426.0,67.0) scale(0.6667)" fill="none" stroke="#fff" stroke-width="3.90" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></g><text x="454" y="80" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#0B1E4A">Funded</text><g filter="url(#sh)"><rect x="476" y="322" width="78" height="78" rx="18" fill="url(#redg)"/></g><g transform="translate(495.0,341.4) scale(1.6667)" fill="none" stroke="#fff" stroke-width="1.32" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></g><g filter="url(#sh)"><circle cx="109" cy="416" r="22" fill="#fff"/></g><g transform="translate(96.8,404.0) scale(1.0000)" fill="none" stroke="#0B1E4A" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></g><g filter="url(#sh)"><circle cx="161" cy="416" r="22" fill="#fff"/></g><g transform="translate(148.8,404.0) scale(1.0000)" fill="none" stroke="#0B1E4A" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></g></svg></div>
+      <div class="about-badge"><div class="about-badge-num">6–12<span> mo</span></div><div class="about-badge-label">Job-Ready</div></div>
+    </div>
+    <div class="fade-up d1">
+      <div class="tag">About the Program</div>
+      <h2 class="headline">Start Your PSW Journey <em>in Canada</em></h2>
+      <div class="divider"></div>
+      <p class="subtext">Passionate about helping others and ready to build a healthcare career in Canada? Through a trusted network of provincially recognised colleges across the Toronto (GTA) region, Touch Abroad helps international students and work permit holders secure PSW admissions at some of Canada's best institutions.</p>
+      <p class="subtext">Your Personal Support Worker certificate comes from a <strong>government-recognised college</strong>, so your qualification is valid right across Ontario and Canada — with the flexibility of on-campus or certified online study, and <strong>interest-free payment plans</strong> that make it affordable.</p>
+      <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;"><a href="#enquire" class="btn btn-primary" data-event="cta_click" data-button="psw-self-about-enquire">Get Admission Help</a><a href="tel:+12899697018" class="btn btn-outline" data-event="phone_click">Call Our Team</a></div>
+    </div>
+  </div>
+</section><!-- SECTION: benefits -->
+<section class="section" style="background:var(--ivory)" data-section="benefits">
+  <div class="container">
+    <div class="services-header fade-up">
+      <div class="tag">Program Benefits</div>
+      <h2 class="headline">Why Choose a <em>PSW Program</em></h2>
+      <p class="subtext">Everything international students and work permit holders need to launch a healthcare career in Canada.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card fade-up"><div class="feature-emoji">🏥</div><h3>Hands-On Training</h3><p>Theory plus real, on-site practical experience in long-term care homes, hospitals and community care — so you're job-ready at graduation.</p></div>
+      <div class="feature-card fade-up d1"><div class="feature-emoji">🎓</div><h3>Recognised Colleges</h3><p>Learn at supportive, diverse partner colleges and universities that help international students thrive academically and socially.</p></div>
+      <div class="feature-card fade-up d2"><div class="feature-emoji">🕐</div><h3>Flexible Class Hours</h3><p>Evening and weekend options plus certified online components let you balance study around work and other commitments.</p></div>
+      <div class="feature-card fade-up"><div class="feature-emoji">💳</div><h3>Interest-Free Payment Plans</h3><p>Spread your tuition over time with interest-free instalments that reduce the burden and make training accessible.</p></div>
+      <div class="feature-card fade-up d1"><div class="feature-emoji">⚡</div><h3>Job-Ready in Under a Year</h3><p>Most PSW programs finish in 6–12 months, so you can start working quickly in a fast-growing, in-demand sector.</p></div>
+      <div class="feature-card fade-up d2"><div class="feature-emoji">🍁</div><h3>Pathway to PR</h3><p>A PSW career can open the door to job offers and eligibility under healthcare-related Permanent Residency streams.</p></div>
+    </div>
+  </div>
+</section><!-- SECTION: audience -->
+<section class="section" data-section="audience">
+  <div class="container">
+    <div class="services-header fade-up">
+      <div class="tag">Who Should Apply</div>
+      <h2 class="headline">This Program Is <em>For You If…</em></h2>
+      <p class="subtext">Built for international students and work permit holders — no prior healthcare experience required.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card fade-up"><div class="audience-emoji">🌍</div><h3>International Students</h3><p>Study at a government-recognised Ontario college with full admissions support from our team.</p></div>
+      <div class="audience-card fade-up d1"><div class="audience-emoji">📋</div><h3>Work Permit Holders</h3><p>Build long-term stability with an in-demand healthcare qualification while you work.</p></div>
+      <div class="audience-card fade-up d2"><div class="audience-emoji">🍁</div><h3>Newcomers to Canada</h3><p>Fast-track into a growing sector with skills Canadian employers actively need.</p></div>
+      <div class="audience-card fade-up d3"><div class="audience-emoji">🔄</div><h3>Career Changers</h3><p>Move into meaningful, stable healthcare work from any background — beginners welcome.</p></div>
+    </div>
+  </div>
+</section><!-- SECTION: outcomes -->
+<section class="section" style="background:var(--cream)" data-section="outcomes">
+  <div class="container">
+    <div class="services-header fade-up">
+      <div class="tag">Career Outcomes</div>
+      <h2 class="headline">Where PSW Graduates <em>Work</em></h2>
+      <p class="subtext">Personal Support Workers are in high demand right across Canada's healthcare system.</p>
+    </div>
+    <div class="role-chips fade-up" style="justify-content:center;max-width:760px;margin:0 auto;"><span class="role-chip">Personal Support Worker</span><span class="role-chip">Healthcare Assistant</span><span class="role-chip">Community Care Worker</span><span class="role-chip">Home Support Worker</span><span class="role-chip">Retirement Home Aide</span><span class="role-chip">Hospital Support Worker</span></div>
+  </div>
+</section><!-- SECTION: why -->
+<section class="why section" data-section="why">
+  <div class="container">
+    <div class="why-content fade-up">
+      <div class="tag" style="color:#f08080;">Your Benefit</div>
+      <h2 class="headline" style="color:#fff;">Why Touch Abroad Is Your <em style="color:#f08080;">Trusted Partner</em></h2>
+      <div class="divider"></div>
+      <p class="subtext" style="color:rgba(255,255,255,.7);">We are committed to making your journey seamless and rewarding. Here's why more than 5,000 students have trusted us with their future.</p>
+      <div class="why-features">
+        <div class="why-feat"><div class="why-feat-icon">🏆</div><div><div class="why-feat-title">Proven Success Record</div><div class="why-feat-desc">Over 5,000 students helped to achieve academic and career success in Canada, under the leadership of Mr. Rahul Loomba.</div></div></div>
+        <div class="why-feat"><div class="why-feat-icon">💬</div><div><div class="why-feat-title">Free Initial Consultation</div><div class="why-feat-desc">Start with a free consultation where we discuss your goals and outline a personalised plan — no cost, no commitment, no pressure.</div></div></div>
+        <div class="why-feat"><div class="why-feat-icon">🤝</div><div><div class="why-feat-title">End-to-End Assistance</div><div class="why-feat-desc">From choosing your program and applying for funding to enrolment and beyond — we are with you every step of the way.</div></div></div>
+      </div>
+    </div>
+    <div class="why-visual fade-up d1">
+      <div class="why-img-main"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" class="ta-illus" role="img" aria-label="healthcare illustration"><defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#EEF2FB"/><stop offset="1" stop-color="#FDFAF6"/></linearGradient>
+      <linearGradient id="navyg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#152B6B"/><stop offset="1" stop-color="#0B1E4A"/></linearGradient>
+      <linearGradient id="redg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#E8383E"/><stop offset="1" stop-color="#C1272D"/></linearGradient>
+      <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#0B1E4A" flood-opacity="0.16"/></filter>
+    </defs><rect width="520" height="620" rx="22" fill="url(#bg)"/><circle cx="478" cy="533" r="104" fill="#C1272D" opacity="0.07"/><circle cx="62" cy="99" r="83" fill="#0B1E4A" opacity="0.06"/><g fill="#0B1E4A" opacity="0.18"><circle cx="384.8" cy="74.39999999999999" r="2.4"/><circle cx="384.8" cy="87.39999999999999" r="2.4"/><circle cx="384.8" cy="100.39999999999999" r="2.4"/><circle cx="384.8" cy="113.39999999999999" r="2.4"/><circle cx="397.8" cy="74.39999999999999" r="2.4"/><circle cx="397.8" cy="87.39999999999999" r="2.4"/><circle cx="397.8" cy="100.39999999999999" r="2.4"/><circle cx="397.8" cy="113.39999999999999" r="2.4"/><circle cx="410.8" cy="74.39999999999999" r="2.4"/><circle cx="410.8" cy="87.39999999999999" r="2.4"/><circle cx="410.8" cy="100.39999999999999" r="2.4"/><circle cx="410.8" cy="113.39999999999999" r="2.4"/><circle cx="423.8" cy="74.39999999999999" r="2.4"/><circle cx="423.8" cy="87.39999999999999" r="2.4"/><circle cx="423.8" cy="100.39999999999999" r="2.4"/><circle cx="423.8" cy="113.39999999999999" r="2.4"/><circle cx="436.8" cy="74.39999999999999" r="2.4"/><circle cx="436.8" cy="87.39999999999999" r="2.4"/><circle cx="436.8" cy="100.39999999999999" r="2.4"/><circle cx="436.8" cy="113.39999999999999" r="2.4"/></g><g filter="url(#sh)"><rect x="104" y="143" width="270" height="285" rx="18" fill="#fff"/></g><circle cx="185" cy="228" r="54" fill="url(#navyg)"/><g transform="translate(154.0,197.1) scale(2.5913)" fill="none" stroke="#fff" stroke-width="0.81" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 10-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></g><rect x="147" y="319" width="168" height="9" rx="4.5" fill="#0B1E4A" opacity="0.85"/><rect x="147" y="339" width="114" height="9" rx="4.5" fill="#0B1E4A" opacity="0.20"/><rect x="147" y="359" width="81" height="9" rx="4.5" fill="#C1272D" opacity="0.85"/><g filter="url(#sh)"><rect x="312" y="62" width="118" height="46" rx="23" fill="#fff"/></g><circle cx="338" cy="85" r="13" fill="#1B8A5A"/><g transform="translate(330.0,77.0) scale(0.6667)" fill="none" stroke="#fff" stroke-width="3.90" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></g><text x="358" y="90" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#0B1E4A">Trusted</text><g filter="url(#sh)"><rect x="364" y="384" width="78" height="78" rx="18" fill="url(#redg)"/></g><g transform="translate(383.0,403.4) scale(1.6667)" fill="none" stroke="#fff" stroke-width="1.32" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></g><g filter="url(#sh)"><circle cx="83" cy="496" r="22" fill="#fff"/></g><g transform="translate(71.2,484.0) scale(1.0000)" fill="none" stroke="#0B1E4A" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></g><g filter="url(#sh)"><circle cx="135" cy="496" r="22" fill="#fff"/></g><g transform="translate(123.2,484.0) scale(1.0000)" fill="none" stroke="#0B1E4A" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></g></svg></div>
+      <div class="why-img-over"><div class="why-img-over-title">5,000+ Students</div><div class="why-img-over-sub">helped to build careers in Canada</div></div>
+    </div>
+  </div>
+</section><!-- SECTION: testimonials -->
+<section class="testimonials section" id="reviews" data-section="testimonials">
+  <div class="container">
+    <div class="testimonials-header fade-up">
+      <div class="tag">Real Student Reviews</div>
+      <h2 class="headline">What Our <em>Students Say</em></h2>
+      <p class="subtext">Real reviews from real Touch Abroad graduates.</p>
+    </div>
+    <div class="testimonials-grid"><div class="testi-card fade-up"><div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testi-text">"TouchAbroad team made my PSW course admission process smooth and hassle-free. Their team was professional, responsive, and guided me through every step. Highly recommend their services!"</p><div class="testi-author"><div class="testi-avatar">MJ</div><div><div class="testi-name">Manya Jain</div><div class="testi-role">Touch Abroad Student — Ontario</div></div></div></div><div class="testi-card featured fade-up d1"><div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testi-text">"The Touch Abroad team is highly professional. I was impressed by their customer service while pursuing the PSW course. The whole process was so smooth, including classes and co-op."</p><div class="testi-author"><div class="testi-avatar">OP</div><div><div class="testi-name">Om P.</div><div class="testi-role">Touch Abroad Student — Ontario</div></div></div></div><div class="testi-card fade-up d2"><div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testi-text">"Had a fantastic experience at Touch Abroad — staff was extremely helpful, knowledgeable and patient throughout enrolment, co-op and the NACC exam. Highly recommend!"</p><div class="testi-author"><div class="testi-avatar">SG</div><div><div class="testi-name">Sanya Gulati</div><div class="testi-role">Touch Abroad Student — Ontario</div></div></div></div></div>
+  </div>
+</section><!-- SECTION: process -->
+<section class="process section" id="process" data-section="process">
+  <div class="container">
+    <div class="process-header fade-up">
+      <div class="tag">Simple Process</div>
+      <h2 class="headline">How to <em>Get Started</em></h2>
+      <p class="subtext">From your first call to your first day — we guide every step.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step active fade-up"><div class="step-num">01</div><div class="step-title">Call or Enquire</div><div class="step-desc">Call +1 (289) 969-7018 or fill in our form. We respond within 1 business hour.</div></div>
+      <div class="process-step fade-up d1"><div class="step-num">02</div><div class="step-title">Check Funding</div><div class="step-desc">We review your status and help apply for Ontario government education funding.</div></div>
+      <div class="process-step fade-up d2"><div class="step-num">03</div><div class="step-title">Enrol &amp; Begin</div><div class="step-desc">We manage your full application and enrolment — just show up and start learning.</div></div>
+      <div class="process-step fade-up d3"><div class="step-num">04</div><div class="step-title">Enrol &amp; Begin</div><div class="step-desc">Complete your application with our help, choose an interest-free plan and start your PSW training in Canada.</div></div>
+    </div>
+  </div>
+</section><!-- SECTION: faq -->
+<section class="faq section" id="faq" data-section="faq">
+  <div class="container">
+    <div class="faq-header fade-up">
+      <div class="tag">FAQs</div>
+      <h2 class="headline">Self-Funded PSW — FAQs</h2>
+      <p class="subtext">Everything international students and work permit holders need to know.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">What is the Self-Funded PSW course at Touch Abroad?</span>
+          <span class="faq-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">It's a comprehensive Personal Support Worker program at a government-recognised Ontario college, combining classroom theory with hands-on practical training. It's designed for international students and work permit holders and is paid through flexible, interest-free payment plans rather than government funding.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">How is this different from the Government-Funded PSW program?</span>
+          <span class="faq-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">The Government-Funded PSW is for eligible Ontario Permanent Residents and Citizens who qualify for government education funding (potentially $0 tuition). The Self-Funded PSW is open to international students and work permit holders and is paid through interest-free instalments — so more people can start, regardless of funding eligibility.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">How can I apply for the PSW course?</span>
+          <span class="faq-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Touch Abroad manages the entire admission process to our partner Canadian colleges for you. Just call +1 (289) 969-7018 or submit the enquiry form and our team will guide you from application through to enrolment.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Can I study while working?</span>
+          <span class="faq-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Our partner colleges offer flexible timings — including morning, evening and weekend options, plus certified online components — so you can balance study with work and other commitments.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Are payment plans available?</span>
+          <span class="faq-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. We help students enrol with interest-free payment plans that spread the cost and make training more accessible, without the burden of interest charges.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Can you assist international students with PSW admissions?</span>
+          <span class="faq-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — guiding international students and work permit holders through PSW admissions in Canada is our specialty. We help with college selection, application forms, interviews, SOPs and the full offer-letter process.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Can a PSW course lead to Permanent Residency?</span>
+          <span class="faq-icon"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Completing a PSW course in Canada can open doors to job offers that support your immigration goals, including eligibility under healthcare-related PR streams. We'll talk through your pathway during your free consultation.</div></div>
+      </div>
+    </div>
+  </div>
+</section><!-- SECTION: cta -->
+<section class="cta-banner" data-section="cta">
+  <div class="container fade-up">
+    <h2>Ready to Start Your <em>PSW Career in Canada?</em></h2>
+    <p>Seats fill fast. Book your free consultation today and let our admissions team guide you from application to enrolment — with interest-free payment options.</p>
+    <div class="cta-actions">
+      <a href="#enquire" class="btn btn-white btn-lg" data-event="cta_click" data-button="cta-banner-primary">Book Free Consultation</a>
+      <a href="tel:+12899697018" class="btn btn-ghost-light btn-lg" data-event="phone_click" data-section="cta">📞 +1 (289) 969-7018</a>
+    </div>
+  </div>
+</section><!-- SECTION: footer-form -->
+<section class="section" id="enquire" style="background:var(--navy)" data-section="footer-form">
+  <div class="container">
+    <div class="split">
+      <div class="split-content fade-up" style="color:#fff;">
+        <div class="tag" style="color:#f08080;">Free Enquiry</div>
+        <h2 class="headline" style="color:#fff;">Enquire About the Self-Funded PSW Program</h2>
+        <div class="divider"></div>
+        <p class="subtext" style="color:rgba(255,255,255,.7);">Submit the form below — our admissions team will contact you within 1 business hour. Free, no obligation. We'll explain the colleges, schedules and interest-free payment options and answer all your questions.</p>
+        <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+          <a href="tel:+12899697018" class="btn btn-primary btn-lg" data-event="phone_click">📞 +1 (289) 969-7018</a>
+          <span style="color:rgba(255,255,255,.6);font-size:.9rem;">or email <a href="mailto:info@touchabroad.ca" style="color:#fff;" data-event="email_click">info@touchabroad.ca</a></span>
+        </div>
+      </div>
+      <div class="fade-up d1"><div class="lead-card" data-section="footer-form">
+  <div class="lead-card-head">
+    <h3>✉️ Send Us Your Enquiry</h3>
+    <p>We'll reply within 1 business hour with all the details you need.</p>
+  </div>
+  <div class="lead-card-body">
+    <form data-lead-form data-form-name="psw_self_footer" novalidate>
+      <div class="form-alert" role="status" aria-live="polite"></div>
+      <div class="field">
+        <label for="psw_self_footer-name">Full Name <span class="req">*</span></label>
+        <input type="text" id="psw_self_footer-name" name="full_name" required autocomplete="name" placeholder="Your full name">
+        <div class="field-error" role="alert"></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="psw_self_footer-phone">Phone Number <span class="req">*</span></label>
+          <input type="tel" id="psw_self_footer-phone" name="phone" required data-validate="phone" autocomplete="tel" placeholder="(289) 000-0000">
+          <div class="field-error" role="alert"></div>
+        </div>
+        <div class="field">
+          <label for="psw_self_footer-email">Email <span class="req">*</span></label>
+          <input type="email" id="psw_self_footer-email" name="email" required data-validate="email" autocomplete="email" placeholder="you@email.com">
+          <div class="field-error" role="alert"></div>
+        </div>
+      </div>
+      <input type="hidden" name="course" value="Personal Support Worker — Self-Funded">
+      <div class="field">
+        <label for="psw_self_footer-contact">Preferred Contact Method</label>
+        <select id="psw_self_footer-contact" name="contact_method">
+          <option value="Phone Call">Phone Call</option>
+          <option value="WhatsApp">WhatsApp</option>
+          <option value="Email">Email</option>
+          <option value="Text Message">Text Message</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="psw_self_footer-message">Message (optional)</label>
+        <textarea id="psw_self_footer-message" name="message" rows="3" placeholder="Tell us a little about your goals…"></textarea>
+      </div>
+      <div class="hp-field" aria-hidden="true"><label>Leave this empty<input type="text" name="_hp" tabindex="-1" autocomplete="off"></label></div>
+      <div class="consent">
+        <input type="checkbox" id="psw_self_footer-consent" name="consent" data-consent>
+        <label for="psw_self_footer-consent">I agree to be contacted by Touch Abroad about programs and funding, and accept the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>. <span class="req">*</span>
+          <div class="field-error" role="alert"></div>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-submit" data-event="cta_click" data-button="psw_self_footer-submit">
+        <span class="btn-label">Submit Enquiry</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+      <div class="lead-foot">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        100% private — we never share your details.
+      </div>
+    </form>
+  </div>
+</div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+
+(function(){
+  var root = document.querySelector('.ta-lp'); if(!root) return;
+  // reveal on scroll
+  try{
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} });
+    }, {threshold:0.12});
+    root.querySelectorAll('.fade-up').forEach(function(el){ io.observe(el); });
+  }catch(e){ root.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); }); }
+  // FAQ accordion
+  root.querySelectorAll('.faq-item .faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.closest('.faq-item'); var open = item.classList.contains('open');
+      root.querySelectorAll('.faq-item.open').forEach(function(o){ o.classList.remove('open'); });
+      if(!open) item.classList.add('open');
+    });
+  });
+  // Lead forms — validate + (demo) redirect. Replace with CF7/Elementor Form for production.
+  window.dataLayer = window.dataLayer || [];
+  root.querySelectorAll('form[data-lead-form]').forEach(function(f){
+    var t0 = Date.now();
+    f.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var hp = f.querySelector('[name="_hp"]');
+      if(hp && hp.value){ return; }                    // honeypot
+      if(Date.now()-t0 < 1200){ return; }              // time-trap
+      var ok = true;
+      f.querySelectorAll('[required]').forEach(function(el){
+        var bad = (el.type==='checkbox') ? !el.checked : !String(el.value).trim();
+        el.classList.toggle('invalid', bad); if(bad) ok=false;
+      });
+      var email = f.querySelector('[name="email"]');
+      if(email && email.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)){ email.classList.add('invalid'); ok=false; }
+      if(!ok) return;
+      var name = f.querySelector('[name="full_name"]');
+      window.dataLayer.push({event:'generate_lead', form_name:f.getAttribute('data-form-name')||'psw_self', course:'Personal Support Worker — Self-Funded'});
+      // TODO: point this at your thank-you page / CF7 confirmation
+      window.location.href = 'thank-you.html?form=' + encodeURIComponent(f.getAttribute('data-form-name')||'psw_self') + (name&&name.value?('&name='+encodeURIComponent(name.value)):'');
+    });
+  });
+})();
+
+</script>

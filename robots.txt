@@ -1,0 +1,9 @@
+# Touch Abroad Educational Services — robots.txt
+User-agent: *
+Allow: /
+
+# Keep conversion / utility pages out of the index
+Disallow: /thank-you.html
+Disallow: /404.html
+
+Sitemap: https://www.touchabroad.ca/sitemap.xml
