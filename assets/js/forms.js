@@ -25,6 +25,10 @@
 
   document.querySelectorAll('form[data-lead-form]').forEach(initForm);
 
+  // Expose so dynamically-injected forms (e.g. the consultation modal in
+  // main.js) can be wired with the same validation + submit lifecycle.
+  window.taInitLeadForm = initForm;
+
   function initForm(form) {
     var formName = form.getAttribute('data-form-name') || 'enquiry';
     var started = false, submitted = false;
