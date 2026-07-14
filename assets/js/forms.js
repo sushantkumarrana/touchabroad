@@ -19,6 +19,8 @@
   var TA_CONFIG = window.TA_CONFIG || {};
   var ENDPOINT  = TA_CONFIG.endpoint || '';            // <-- set in page or here
   var THANKYOU  = TA_CONFIG.thankYouUrl || 'thank-you.html';
+  var SB_URL    = (TA_CONFIG.supabaseUrl || '').replace(/\/+$/, '');  // Supabase project URL
+  var SB_KEY    = TA_CONFIG.supabaseKey || '';                        // publishable (anon) key
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var PHONE_RE = /^[+()\-\s\d]{7,20}$/;
@@ -164,8 +166,24 @@
       window.location.href = THANKYOU + '?form=' + encodeURIComponent(formName) + nm;
     };
 
+    // 1) Preferred backend: Supabase (insert straight into the leads table).
+    if (SB_URL && SB_KEY) {
+      supabaseInsert(payload)
+        .then(function () { redirect(); })
+        .catch(function (err) {
+          // Surface real failures instead of a false success, so a broken
+          // config/RLS is visible rather than silently dropping leads.
+          if (btn) btn.classList.remove('loading');
+          if (window.console) console.error('[TouchAbroad] Supabase insert failed:', err);
+          taTrack('form_error', { form_name: formName, error_type: 'supabase_insert' });
+          showAlert(form, 'error', 'Sorry — something went wrong submitting your details. Please try again or call us at +1 (289) 969-7018.');
+        });
+      return;
+    }
+
+    // 2) Fallback: generic webhook endpoint (Apps Script, etc.).
     if (!ENDPOINT) {
-      // No backend wired yet — succeed gracefully so the funnel still works.
+      // No backend wired — succeed gracefully so the funnel still works.
       if (btn) btn.classList.remove('loading');
       showAlert(form, 'success', 'Thank you! Your enquiry has been received. Redirecting…');
       setTimeout(redirect, 900);
@@ -184,5 +202,59 @@
         showAlert(form, 'success', 'Thank you! Your enquiry has been received. Redirecting…');
         setTimeout(redirect, 1200);
       });
+  }
+
+  /* Shape the collected payload into a leads-table row. Known fields map to
+     columns; the entire raw payload is also kept in `metadata` so nothing is
+     ever lost if the forms gain fields later. */
+  function buildLeadRow(p) {
+    var col = function (v) { return (v === undefined || v === '') ? null : v; };
+    return {
+      full_name:      col(p.full_name),
+      phone:          col(p.phone),
+      email:          col(p.email),
+      course:         col(p.course),
+      contact_method: col(p.contact_method),
+      message:        col(p.message),
+      consent:        !!p.consent,
+      form_name:      col(p.form_name),
+      page_name:      col(p.page_name),
+      page_url:       col(p.page_url),
+      submitted_at:   col(p.submitted_at),
+      utm_source:     col(p.utm_source),
+      utm_medium:     col(p.utm_medium),
+      utm_campaign:   col(p.utm_campaign),
+      utm_term:       col(p.utm_term),
+      utm_content:    col(p.utm_content),
+      gclid:          col(p.gclid),
+      fbclid:         col(p.fbclid),
+      referrer:       col(p.referrer),
+      landing_page:   col(p.landing_page),
+      first_seen:     col(p.first_seen),
+      device:         col(p.device),
+      user_agent:     col(p.user_agent),
+      language:       col(p.language),
+      metadata:       p
+    };
+  }
+
+  function supabaseInsert(payload) {
+    return fetch(SB_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(buildLeadRow(payload))
+    }).then(function (res) {
+      if (!res.ok) {
+        return res.text().then(function (t) {
+          throw new Error('HTTP ' + res.status + ' — ' + t);
+        });
+      }
+      return true;
+    });
   }
 })();

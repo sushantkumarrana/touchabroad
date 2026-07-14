@@ -822,7 +822,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   window.TA_CONFIG = {
     endpoint: '',            // e.g. 'https://script.google.com/macros/s/XXXX/exec'
     thankYouUrl: 'thank-you.html',
-    leadValue: 0             // optional Google Ads / GA4 lead value (CAD)
+    leadValue: 0,            // optional Google Ads / GA4 lead value (CAD)
+    // Supabase — publishable key is browser-safe; leads table is insert-only via RLS
+    supabaseUrl: 'https://fmhvhvwtiwrddfngoffn.supabase.co',
+    supabaseKey: 'sb_publishable_y70ch58K1bYaOw3jJ4jfEQ__fu6THKY'
   };
 </script>
 <script src="assets/js/tracking.js" defer></script>
