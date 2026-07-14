@@ -162,8 +162,15 @@
     });
 
     var redirect = function () {
-      var nm = payload.full_name ? '&name=' + encodeURIComponent(payload.full_name) : '';
-      window.location.href = THANKYOU + '?form=' + encodeURIComponent(formName) + nm;
+      // Pass context via sessionStorage (not the URL) so the thank-you page
+      // stays a clean, parameter-free URL that GTM's pageview trigger matches.
+      try {
+        sessionStorage.setItem('ta_ty', JSON.stringify({
+          form: formName,
+          name: payload.full_name || ''
+        }));
+      } catch (e) {}
+      window.location.href = THANKYOU;
     };
 
     // 1) Preferred backend: Supabase (insert straight into the leads table).

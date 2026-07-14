@@ -34,7 +34,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="assets/css/styles.css?v=20260714a">
+<link rel="stylesheet" href="assets/css/styles.css?v=20260714b">
 
 <!-- ============ GOOGLE TAG MANAGER (replace GTM-XXXXXXX) ============ -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -253,15 +253,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     supabaseKey: 'sb_publishable_y70ch58K1bYaOw3jJ4jfEQ__fu6THKY'
   };
 </script>
-<script src="assets/js/tracking.js?v=20260714a" defer></script>
-<script src="assets/js/forms.js?v=20260714a" defer></script>
-<script src="assets/js/main.js?v=20260714a" defer></script>
+<script src="assets/js/tracking.js?v=20260714b" defer></script>
+<script src="assets/js/forms.js?v=20260714b" defer></script>
+<script src="assets/js/main.js?v=20260714b" defer></script>
 
 <script>
   // Thank-you conversion tracking — each form fires its own conversion.
+  // Context comes from sessionStorage (set by forms.js) so this page keeps a
+  // clean, parameter-free URL that GTM's pageview trigger can match. Falls back
+  // to legacy ?form=/?name= params for backward compatibility.
   (function(){
+    var info = {};
+    try { info = JSON.parse(sessionStorage.getItem('ta_ty')) || {}; } catch (e) {}
     var params = new URLSearchParams(location.search);
-    var formName = params.get('form') || 'unknown';
+    var formName = info.form || params.get('form') || 'unknown';
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'thank_you',
@@ -271,12 +276,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       page_url: location.href,
       timestamp: new Date().toISOString()
     });
-    // Friendly greeting if a name was passed
-    var nm = params.get('name');
+    // Friendly greeting if a name is available
+    var nm = info.name;
+    if (!nm) { var p = params.get('name'); if (p) nm = decodeURIComponent(p); }
     if (nm) {
       var el = document.getElementById('ty-name');
-      if (el) el.textContent = decodeURIComponent(nm).split(' ')[0] + '!';
+      if (el) el.textContent = nm.split(' ')[0] + '!';
     }
+    // Clear so a refresh or later visit doesn't re-fire with stale data
+    try { sessionStorage.removeItem('ta_ty'); } catch (e) {}
   })();
 </script>
 </body>
