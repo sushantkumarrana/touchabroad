@@ -8,11 +8,11 @@
 //   GMAIL_APP_PASSWORD  — 16-char Google App Password for the sender account
 //   WEBHOOK_SECRET      — must match the value in the on_lead_created trigger
 // Optional (have sensible defaults baked in):
-//   GMAIL_USER          — sender Gmail (default touchofferletter16@gmail.com)
+//   GMAIL_USER          — sender Gmail (default sushantrana494@gmail.com)
 //   NOTIFY_TO           — comma-separated recipients
 import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts";
 
-const GMAIL_USER = Deno.env.get("GMAIL_USER") ?? "touchofferletter16@gmail.com";
+const GMAIL_USER = Deno.env.get("GMAIL_USER") ?? "sushantrana494@gmail.com";
 const GMAIL_APP_PASSWORD = Deno.env.get("GMAIL_APP_PASSWORD") ?? "";
 const WEBHOOK_SECRET = Deno.env.get("WEBHOOK_SECRET") ?? "";
 const NOTIFY_TO = (Deno.env.get("NOTIFY_TO") ?? "me@sushantrana.com,touchofferletter16@gmail.com")
