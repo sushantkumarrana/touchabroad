@@ -13,7 +13,8 @@
 import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts";
 
 const GMAIL_USER = Deno.env.get("GMAIL_USER") ?? "sushantrana494@gmail.com";
-const GMAIL_APP_PASSWORD = Deno.env.get("GMAIL_APP_PASSWORD") ?? "";
+// Strip spaces — Google shows app passwords as "abcd efgh ijkl mnop".
+const GMAIL_APP_PASSWORD = (Deno.env.get("GMAIL_APP_PASSWORD") ?? "").replace(/\s+/g, "");
 const WEBHOOK_SECRET = Deno.env.get("WEBHOOK_SECRET") ?? "";
 const NOTIFY_TO = (Deno.env.get("NOTIFY_TO") ?? "me@sushantrana.com,touchofferletter16@gmail.com")
   .split(",").map((s) => s.trim()).filter(Boolean);
